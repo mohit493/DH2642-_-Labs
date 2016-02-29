@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>Dinner Planer</title>
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styling.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans|Raleway' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
+    <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+
+</head>
+
+<body>
+
+
+    <nav class="navbar navbar-fixed-to-top" role="navigation">
+        <div class="container">
+            <div class="page-header" align="center">
+                <h1 class="title"><a href = "index.html" class = "navbar-home">HOMELETTE</a></h1>
+                <h3 class="subtitle">From the best chefs in the world directly into your kitchen</h3>
+            </div>
+        </div>
+    </nav>
+
+    <!-- View 1 -->
+    <div id="homeView" align="center">
+        <div class="container-fluid background">
+            <div class="jumbotron col-md-12" align="center">
+
+                <h3 class="header">A Home Dinner Service</h3>
+
+                <p class="intro" align="center">
+
+                    <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis </h5></p>
+                <br>
+                <br>
+                <p class="intro">
+                    <h4>Start quickly</h4></p>
+                <button id="createDinner" class="btn btn-warning btn-lg" role="button">Create new dinner</button>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- View 2 -->
+    <div id="sidebarView" style="display:none;">
+        <div class="col-md-4">
+            <div>
+                <h3>My Dinner</h3> Edit number of guests :
+                <input type="number" id="setNumberOfGuests" value="1" min="1" />
+
+            </div>
+
+            <table class="table" id="menu-table">
+                <thead>
+                    <th>Dish Name</th>
+                    <th>Cost</th>
+                </thead>
+                <tbody class="table-striped">
+                    <tr id="starterRow">
+                        <td id="starterName"></td>
+                        <td id="starterCost"></td>
+                        <td>
+                            <button id="removeStarterX" class="btn btn-xs btn-danger">x</button>
+                        </td>
+                    </tr>
+                    <tr id="mainRow">
+                        <td id="mainName"></td>
+                        <td id="mainCost"></td>
+                        <td>
+                            <button id="removeMainX" class="btn btn-xs btn-danger">x</button>
+                        </td>
+                    </tr>
+                    <tr id="dessertRow">
+                        <td id="dessertName"></td>
+                        <td id="dessertCost"></td>
+                        <td>
+                            <button id="removeDessertX" class="btn btn-xs btn-danger">x</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="total_text" style="text-align:left">Total Amount</td>
+                        <td id="total" style="text-align:right">SEK</td>
+                        <td id="totalPrice"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div></div>
+            <div align="right">
+                <button id="confirmButton" class="btn btn-warning">Confirm Dinner</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- View 3 -->
+
+    <div class="col-md-offset-4" id="searchbar" style="display:none;">
+
+        <table class="table">
+            <thead>
+                <th>
+                    <h3>Search Dish</h3></th>
+                <th>
+                    <select class="form-control" id="option">
+                        <option id="allOpt">All</option>
+                        <option id="startersOpt">Starters</option>
+                        <option id="mainOpt">Main course</option>
+                        <option id="dessertsOpt">Desserts</option>
+                    </select>
+                </th>
+                <th>
+                    <form role="form">
+
+                        <!-- <label for="searchDish">SELECT DISH</label> -->
+                        <input type="keyword" class="form-control" id="searchDish" placeholder="Enter keyword">
+
+                    </form>
+                </th>
+            </thead>
+            <tbody>
+
+
+            </tbody>
+        </table>
+    </div>
+
+    <div id="selectDishView" style="display:none;" class="col-md-offset-4">
+
+        <div class="container">
+            <div class="col-md-9">
+                <div class="centered">
+                    <div id="starters"> </div>
+                    <div id="main"> </div>
+                    <div id="desserts"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- View 4 -->
+
+    <!-- Dish Description -->
+    <div class="col-md-offset-4" id="dishDescriptionView" style="display:none;">
+
+        <div class="col-md-6">
+
+            <div></div>
+
+            <h3 id="dishName"></h3>
+            <img id="dishImage">
+            <br>
+            <br>
+
+            <h3>PREPARATION</h3>
+            <p id="dishPreparation"></p>
+            <button id="backToSelectDish" class="btn btn-warning" role: "button">Back to select dish</button>
+        </div>
+
+        <div class="col-md-offset-7">
+            <h3>Ingredients for <span id="ingredientsFor"></span> people</h3>
+            <div id="ingredientsList">
+            </div>
+
+            <br>
+            <br>
+            <div style="padding-left:0px;">
+                <button id="confirmDish" class="btn btn-warning" style="display:inline;">Confirm Dish</button>
+                <span id="dishCost"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- View 5 -->
+
+    <div id="numGuestsView" style="display:none">
+        <div class="container">
+            <div class="col-md-12">
+
+                <h1>My dinner: <span id="numberOfGuests"></span> people
+	 			<button id="backButton" class="btn btn-warning" role="button" style="float:right;">Go back and edit dinner</button>  
+	 		</h1>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- View 6 -->
+
+    <!-- Summary view !-->
+    <div id="summaryView" style="display:none">
+        <div class="container">
+
+
+            <div class="col-md-8">
+                <div class="centered">
+
+                    <div id="images">
+                        <a>
+                            <img id="starter" width="150px" height="150px">
+                            <div class="caption"><span id="starterName">--</span></div>
+                            <div class="caption"><span id="starterCost">-</span></div>
+                        </a>
+                        <a>
+                            <img id="main" width="150px" height="150px">
+                            <div class="caption"><span id="mainName">--</span></div>
+                            <div class="caption"><span id="mainCost">-</span></div>
+                        </a>
+                        <a>
+                            <img id="dessert" width="150px" height="150px">
+                            <div class="caption"><span id="dessertName">--</span></div>
+                            <div class="caption"><span id="dessertCost">-</span></div>
+                        </a>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h5 id='totalCostHeader'>Total cost: <span id="totalPrice"></span> SEK </h5>
+                <button id="printRecipeBtn" class="btn btn-warning btn-lg btn-block">Print full recipe</button>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <!-- View 7 -->
+    <!-- Instructions view !-->
+    <div id="instructionsView" style="display:none;">
+        <div class="container">
+            <div class="col-md-2">
+                <img id="starterImage" width="150px" height="150px">
+            </div>
+            <div class="col-md-4">
+                <h1 id='starterName'></h1>
+                <span id='starterIngredients'></span>
+            </div>
+            <div class="col-md-6">
+                <h3>Preparation</h3>
+                <span id='starterPreparation'></span>
+            </div>
+        </div>
+        <div class="container" style="padding-top: 20px">
+            <div class="col-md-2">
+                <img id="mainImage" width="150px" height="150px">
+            </div>
+            <div class="col-md-4">
+                <h1 id='mainName'></h1>
+                <span id='mainIngredients'></span>
+            </div>
+            <div class="col-md-6">
+                <h3>Preparation</h3>
+                <span id='mainPreparation'></span>
+            </div>
+        </div>
+        <div class="container" style="padding-top: 20px">
+            <div class="col-md-2">
+                <img id="dessertImage" width="150px" height="150px">
+            </div>
+            <div class="col-md-4">
+                <h1 id='dessertName'></h1>
+                <span id='dessertIngredients'></span>
+            </div>
+            <div class="col-md-6">
+                <h3>Preparation</h3>
+                <span id='dessertPreparation'></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="js/typeahead.min.js"></script>
+    <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+    <!-- The application JavaScript code -->
+    <script src="js/app.js"></script>
+    <script src="js/model/dinnerModel.js"></script>
+    <script src="js/typeahead.min.js"></script>
+    <script src="js/view/exampleView.js"></script>
+    <script src="js/view/selectDishView.js"></script>
+    <script src="js/controller/selectDishViewController.js"></script>
+    <script src="js/view/summaryView.js"></script>
+    <script src="js/controller/summaryViewController.js"></script>
+    <script src="js/view/numGuestsView.js"></script>
+    <script src="js/controller/numGuestsViewController.js"></script>
+    <script src="js/view/instructionsView.js"></script>
+    <script src="js/view/dishDescriptionView.js"></script>
+    <script src="js/controller/dishDescriptionController.js"></script>
+    <script src="js/view/sidebarView.js"></script>
+    <script src="js/controller/sidebarController.js"></script>
+    <!--script src="js/view/exampleViewController.js"></script-->
+
+
+</body>
+
+</html>
