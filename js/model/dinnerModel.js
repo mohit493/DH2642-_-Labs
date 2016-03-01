@@ -146,6 +146,48 @@ var DinnerModel = function () {
         notifyObservers();
     }
 
+    this.getAllDishes2 = function (type, filter) {
+        console.log("Entered Get all Dishes");
+
+        var apiKey = "8vtk7KykflO5IzB96kb0mpot0sU40096";
+        var param = "pg=1&rpp=3&any_kw="
+        var url = "http://api.bigoven.com/recipes?" + param + type + "&api_key=18f3cT02U9f6yRl3OKDpP8NA537kxYKu";
+
+        var copy = this;
+
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            cache: false,
+            url: url,
+            success: function (data) {
+                copy.notifyObservers(data);
+                return $(data.Results).filter(function (index, dish) {
+                    var found = true;
+                    // console.log("dish1" + dish.Title);
+                    if (filter) {
+                        found = false;
+                        $.each(dish.ingredients, function (index, ingredient) {
+                            if (ingredient.Name.indexOf(filter) != -1) {
+                                found = true;
+                            }
+                        });
+                        if (dish.Title.indexOf(filter) != -1) {
+                            found = true;
+                        }
+                    }
+                    copy.notifyObservers(data);
+                    return ((dish.Category == type) && found);
+                });
+
+            }
+        });
+
+
+    }
+
+
+
     //function that returns a dish of specific ID
     this.getDish = function (id) {
         for (key in dishes) {
@@ -155,21 +197,44 @@ var DinnerModel = function () {
         }
     }
 
-    var observers = [];
+    this.getDish2 = function () {
 
-    this.addObserver = function (observer) {
-        observers.push(observer);
+        console.log("entered function");
+        var apiKey = "8vtk7KykflO5IzB96kb0mpot0sU40096";
+        var recipeID = 196149; //id
+        var url = "http://api.bigoven.com/recipe/" + recipeID + "?api_key=" + apiKey;
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            cache: false,
+            url: url,
+            success: function (data) {
+                alert('success');
+
+                console.log(data.Title);
+            }
+
+        });
+
+        console.log("finished");
     }
 
-    var notifyObservers = function (arg) {
-        for (var i = 0; i < observers.length; i++) {
-            observers[i].update(arg);
+    this.observers = [];
+
+    this.addObserver = function (observer) {
+        this.observers.push(observer);
+    }
+
+    this.notifyObservers = function (arg) {
+        for (var i = 0; i < this.observers.length; i++) {
+            this.observers[i].update(arg);
+            console.log("Hola");
         }
     }
 
     this.setClickedDish = function (id) {
         selectedDish = id;
-        notifyObservers();
+        notifyObservers(arg);
     }
 
     this.getClickedDish = function () {
