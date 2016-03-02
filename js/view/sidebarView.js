@@ -42,7 +42,6 @@ var SidebarView = function (container, model) {
         //display total price
         this.totalPrice.html(model.getTotalMenuPrice());
 
-        console.log("updated sidebar");
     }
 
     this.update();

@@ -30,7 +30,6 @@ var SidebarController = function(view, model) {
 	 //change number if gests
 	$('#setNumberOfGuests').bind('input', function() {
     	model.setNumberOfGuests($(this).val());
-    	console.log("number of guests: " + $(this).val());
 	});
 
 
