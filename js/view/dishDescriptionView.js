@@ -15,36 +15,34 @@ var DishDescriptionView = function (container, model) {
 
     model.addObserver(this);
 
-    this.update = function (arg, type) {
+    this.update = function (arg) {
 
-        if (type == "1") {
+        console.log(arg.type);
+        if (arg.type == "item") {
 
-            this.dishName.html(arg.Title);
-            this.dishImage.attr('src', 'images/' + arg.ImageURL);
-            this.dishPreparation.html(arg.Description);
+            this.dishName.html(arg.content.Title);
+            this.dishImage.attr('src', arg.content.ImageURL);
+            this.dishPreparation.html(arg.content.Description);
 
             var ingredientsList = "";
             var totalPrice = 0;
-       }
-        
 
-        /*for (var x = 0; x < this.dish.ingredients.length; x++) {
+            for (var x = 0; x < arg.content.Ingredients.length; x++) {
             ingredientsList += ' ' +
-                (model.getNumberOfGuests() * (this.dish.ingredients[x].quantity)) + ' ' +
-                this.dish.ingredients[x].unit + ' ' +
-                this.dish.ingredients[x].name + ' ' +
-                'SEK ' + this.dish.ingredients[x].price + '</span><br>';
-            totalPrice += this.dish.ingredients[x].price;
+                (model.getNumberOfGuests() * (arg.content.Ingredients[x].Quantity)) + ' ' +
+                arg.content.Ingredients[x].Unit + ' ' +
+                arg.content.Ingredients[x].Name + ' ' +
+                'SEK ' + (arg.content.Ingredients[x].Quantity) + '</span><br>';
+            totalPrice += (arg.content.Ingredients[x].Quantity);
         }
 
         this.ingredientsFor.html(model.getNumberOfGuests());
         document.getElementById("ingredientsList").innerHTML = ingredientsList;
         document.getElementById("dishCost").innerHTML = 'SEK ' + (totalPrice * (model.getNumberOfGuests()));
-        */
+       }
+        
+
+        
     }
-
-
-    this.update();
-
 
 }

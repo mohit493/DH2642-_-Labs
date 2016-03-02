@@ -1,39 +1,17 @@
 //Controller 3 by Giovanna and Mohit
 var SelectDishViewController = function (view, model) {
 
-    /*  $('#searchDish').bind("enterKey", function () {
-        console.log("Entered Enter key");
-        $('#searchDish').bind('input', function () {
-            console.log("Entered Input")
-            var dishtype = this.value;
-            model.getAllDishes2(dishtype);
-            console.log("Dish : " + dishtype);
-        });
-    });
-*/
-        /*console.log("list div" + $('#list div').length);
-        for (var i = 0; i < $('#list div').length; i++) {
-            console.log("after for");
-            var curr = $('#list div')[i];
-            curr.onclick = function () {
-                $('#selectDishView').hide();
-                $('#searchbar').hide();
-                $('#dishDescriptionView').show();
-                model.setClickedDish(this.id);
-                console.log("setClickedDish: " + this.id);
-            }
-        }*/
 
-$("#selectDishView").on("click", "li[data-dish-id]", function () {
-                var dishId = $(this).attr("data-dish-id");
-                console.log("List id", dishId);
-                $('#selectDishView').hide();
-                $('#searchbar').hide();
-                $('#dishDescriptionView').show();
-                model.setClickedDish(dishId);
-                model.getDish2(dishId);
-                //console.log("setClickedDish", $(this).attr("id"));
-            });
+    $("#selectDishView").on("click", "li[data-dish-id]", function () {
+        var dishId = $(this).attr("data-dish-id");
+        console.log("List id", dishId);
+        $('#selectDishView').hide();
+        $('#searchbar').hide();
+        $('#dishDescriptionView').show();
+        model.setClickedDish(dishId);
+        model.getDish2(dishId);
+        //console.log("setClickedDish", $(this).attr("id"));
+    });
 
 
     $(document).on("change", "#option", function () {
