@@ -17,8 +17,10 @@ var DishDescriptionView = function (container, model) {
 
     this.update = function (arg) {
 
-        console.log(arg.type);
         if (arg.type == "item") {
+
+            //upload dish info
+            this.dish = arg.content;
 
             this.dishName.html(arg.content.Title);
             this.dishImage.attr('src', arg.content.ImageURL);

@@ -13,21 +13,21 @@ var DishDescriptionController = function(view, model) {
 		$('#dishDescriptionView').hide();
 		$('#selectDishView').show();
 		$('#searchbar').show();
-		model.addDishToMenu(view.dish.id);
-		if (view.dish.type == 'starter') {
+		model.addDishToMenu(view.dish);
+		if (view.dish.Category == 'Appetizers') {
 			$('#starterRow').show();
-			$('#starterItem').text(view.dish.name);
-			$('#starterItemCost').text(model.getDishPrice(view.dish));
+			$('#starterItem').text(view.dish.Title);
+			//$('#starterItemCost').text(model.getDishPrice(view.dish));
 		}
-		if (view.dish.type == 'main dish') {
+		if (view.dish.Category == 'Main Dish') {
 			$('#mainRow').show();
-			$('#mainItem').text(view.dish.name);
-			$('#mainItemCost').text(model.getDishPrice(view.dish));
+			$('#mainItem').text(view.dish.Title);
+			//$('#mainItemCost').text(model.getDishPrice(view.dish));
 		}
-		if (view.dish.type == 'dessert') {
+		if (view.dish.Category == 'Desserts') {
 			$('#dessertRow').show();
-			$('#dessertItem').text(view.dish.name);
-			$('#mainItemCost').text(model.getDishPrice(view.dish));
+			$('#dessertItem').text(view.dish.Title);
+			//$('#mainItemCost').text(model.getDishPrice(view.dish));
 		}
 	});
 

@@ -22,26 +22,20 @@ var DinnerModel = function () {
 
     //create null menu for testing
     this.createMenu = function () {
-        this.menuOptions['starter'] = 0;
-        this.menuOptions['main dish'] = 0;
-        this.menuOptions['dessert'] = 0;
+        this.menuOptions['Appetizers'] = 0;
+        this.menuOptions['Main Dish'] = 0;
+        this.menuOptions['Desserts'] = 0;
     }
 
     this.createMenu();
 
     //Adds the passed dish number to the menu. If the dish of that type already exists on the menu
     //it is removed from the menu and the new one added.
-    this.addDishToMenu = function (id) {
-        //find type of dish
-        var dishType;
-        for (key in dishes) {
-            if (dishes[key].id == id) {
-                dishType = dishes[key].type;
-            }
-        }
+    this.addDishToMenu = function (dish) {
         //replace in the manu the dish of this type
-        this.menuOptions[dishType] = id;
-        this.notifyObservers();
+        this.menuOptions[dish.Category] = dish.RecipeID;
+        var args = {type:"item", content:dish}; 
+        this.notifyObservers(dish);
     }
 
 
@@ -235,7 +229,6 @@ var DinnerModel = function () {
     }
 
     this.getClickedDish = function () {
-        console.log("getClickedDish: " + selectedDish);
         return selectedDish;
     }
 

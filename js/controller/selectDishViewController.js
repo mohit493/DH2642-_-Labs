@@ -4,13 +4,11 @@ var SelectDishViewController = function (view, model) {
 
     $("#selectDishView").on("click", "li[data-dish-id]", function () {
         var dishId = $(this).attr("data-dish-id");
-        console.log("List id", dishId);
         $('#selectDishView').hide();
         $('#searchbar').hide();
         $('#dishDescriptionView').show();
         model.setClickedDish(dishId);
         model.getDish2(dishId);
-        //console.log("setClickedDish", $(this).attr("id"));
     });
 
 
@@ -21,7 +19,6 @@ var SelectDishViewController = function (view, model) {
             $('#starters').show();
             $('#main').hide();
             $('#desserts').hide();
-            console.log("entered on change");
         } else if (selected == "Main course") {
             model.getAllDishes2("Main Dish");
             $('#starters').hide();
@@ -40,16 +37,4 @@ var SelectDishViewController = function (view, model) {
         }
     });
 
-    /*console.log("list div" + $('#list div').length);
-    for (var i = 0; i < $('#list div').length; i++) {
-        console.log("after for");
-        var curr = $('#list div')[i];
-        curr.onclick = function () {
-            $('#selectDishView').hide();
-            $('#searchbar').hide();
-            $('#dishDescriptionView').show();
-            model.setClickedDish(this.id);
-            console.log("setClickedDish: " + this.id);
-        }
-    }*/
 }

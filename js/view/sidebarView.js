@@ -29,15 +29,28 @@ var SidebarView = function (container, model) {
         //display number of guests
         this.numberOfGuests.html(model.getNumberOfGuests());
 
+        if(arg.type == "item") {
+            if (arg.content.Category == "Appetizers"); {
+                this.starter = arg.content;
+            }
+            if (arg.content.Category == "Main Dish"); {
+                this.main = arg.content;
+            }
+            if (arg.content.Category == "Desserts"); {
+                this.dessert = arg.content;
+            }
+                
+        }
+
         //update dishes choices
         this.starter = model.getDish(model.getSelectedDish('starter'));
         this.main = model.getDish(model.getSelectedDish('main dish'));
         this.dessert = model.getDish(model.getSelectedDish('dessert'));
 
         //display dishes
-        this.starterName.html(this.starter.name);
-        this.mainName.html(this.main.name);
-        this.dessertName.html(this.dessert.name);
+        this.starterName.html(this.starter.Title);
+        this.mainName.html(this.main.Title);
+        this.dessertName.html(this.dessert.Title);
 
         //display total price
         this.totalPrice.html(model.getTotalMenuPrice());
