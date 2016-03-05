@@ -9,34 +9,11 @@ var DishDescriptionController = function (view, model) {
         $('#searchbar').show();
     });
 
-<<<<<<< Updated upstream
-	$("#confirmDish").click(function(){
-		$('#dishDescriptionView').hide();
-		$('#selectDishView').show();
-		$('#searchbar').show();
-		model.addDishToMenu(view.dish);
-		if (view.dish.Category == 'Appetizers') {
-			$('#starterRow').show();
-			$('#starterItem').text(view.dish.Title);
-			//$('#starterItemCost').text(model.getDishPrice(view.dish));
-		}
-		if (view.dish.Category == 'Main Dish') {
-			$('#mainRow').show();
-			$('#mainItem').text(view.dish.Title);
-			//$('#mainItemCost').text(model.getDishPrice(view.dish));
-		}
-		if (view.dish.Category == 'Desserts') {
-			$('#dessertRow').show();
-			$('#dessertItem').text(view.dish.Title);
-			//$('#mainItemCost').text(model.getDishPrice(view.dish));
-		}
-	});
-=======
     $("#confirmDish").click(function () {
         $('#dishDescriptionView').hide();
         $('#selectDishView').show();
         $('#searchbar').show();
-        model.addDishToMenu(view.dish);
+        model.addDishToMenu(view.dish, view.totalPrice);
         if (view.dish.Category == 'Appetizers') {
             $('#starterRow').show();
             $('#starterItem').text(view.dish.Title);
@@ -53,6 +30,5 @@ var DishDescriptionController = function (view, model) {
             //$('#mainItemCost').text(model.getDishPrice(view.dish));
         }
     });
->>>>>>> Stashed changes
 
 }

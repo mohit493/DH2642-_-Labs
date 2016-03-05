@@ -18,38 +18,38 @@ var SummaryView = function (container, model) {
 
     this.printRecipeBtn = container.find("#printRecipeBtn");
 
-    this.update = function(arg) {
+    model.addObserver(this);
 
-        for (var i = 0; i < model.getFullMenu().length; i++) {
-            var dish = model.getFullMenu()[i];
 
-            if (dish.type == 'starter') {
-                this.starter.attr('src', 'images/' + dish.image);
-                this.starterName.html(dish.name);
-                this.starterCost.html(model.getDishPrice(dish) + ' SEK');
-            }
-            if (dish.type == 'main dish') {
-                this.main.attr('src', 'images/' + dish.image);
-                this.mainName.html(dish.name);
-                this.mainCost.html(model.getDishPrice(dish) + ' SEK');
-            }
-            if (dish.type == 'dessert') {
-                this.dessert.attr('src', 'images/' + dish.image);
-                this.dessertName.html(dish.name);
-                this.dessertCost.html(model.getDishPrice(dish) + ' SEK');
+    this.update = function (arg) {
+        if (arg) {
+            if (arg.type == "add") {
+
+                for (var i = 0; i < model.getFullMenu().length; i++) {
+                    var dish = model.getFullMenu()[i];
+
+                    if (dish.Category == 'Appetizers') {
+                        this.starter.attr('src', dish.ImageURL);
+                        this.starterName.html(dish.Title);
+                        this.starterCost.html(model.getDishPrice2(dish.Category) + ' SEK/pc');
+                    }
+                    if (dish.Category == 'Main Dish') {
+                        this.main.attr('src', dish.ImageURL);
+                        this.mainName.html(dish.Title);
+                        this.mainCost.html(model.getDishPrice2(dish.Category) + ' SEK/pc');
+                    }
+                    if (dish.Category == 'Desserts') {
+                        this.dessert.attr('src', dish.ImageURL);
+                        this.dessertName.html(dish.Title);
+                        this.dessertCost.html(model.getDishPrice2(dish.Category) + ' SEK/pc');
+                    }
+                }
             }
         }
         this.totalPrice.html(model.getTotalMenuPrice());
     }
 
-    model.addObserver(this);
-
     this.update();
-
-    
-
-
-
 
 
 }

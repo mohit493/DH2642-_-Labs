@@ -29,7 +29,11 @@ var SidebarView = function (container, model) {
         //display number of guests
         this.numberOfGuests.html(model.getNumberOfGuests());
         if (arg) {
+
             if (arg.type == "add") {
+
+
+
                 console.log("Dish type ", arg.content.Category)
                 if (arg.content.Category == "Appetizers") {
                     this.starterName.html(arg.content.Title);
@@ -39,33 +43,8 @@ var SidebarView = function (container, model) {
                     this.dessertName.html(arg.content.Title);
                 }
 
-<<<<<<< Updated upstream
-        if(arg.type == "item") {
-            if (arg.content.Category == "Appetizers"); {
-                this.starter = arg.content;
-            }
-            if (arg.content.Category == "Main Dish"); {
-                this.main = arg.content;
-            }
-            if (arg.content.Category == "Desserts"); {
-                this.dessert = arg.content;
-            }
-                
-        }
-
-        //update dishes choices
-        this.starter = model.getDish(model.getSelectedDish('starter'));
-        this.main = model.getDish(model.getSelectedDish('main dish'));
-        this.dessert = model.getDish(model.getSelectedDish('dessert'));
-
-        //display dishes
-        this.starterName.html(this.starter.Title);
-        this.mainName.html(this.main.Title);
-        this.dessertName.html(this.dessert.Title);
-=======
             }
 
->>>>>>> Stashed changes
 
         }
         this.totalPrice.html(model.getTotalMenuPrice());

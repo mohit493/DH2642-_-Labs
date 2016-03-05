@@ -7,6 +7,14 @@ var DinnerModel = function () {
     var numberOfGuests = 1;
     this.menuOptions = [];
 
+    this.Appetizer;
+    this.MD;
+    this.desserts;
+
+    this.Appetizersprice = 0;
+    this.MDprice = 0;
+    this.dessertsprice = 0;
+
     //store the dish that was clicked
     var selectedDish = 1;
 
@@ -33,23 +41,29 @@ var DinnerModel = function () {
 
     //Adds the passed dish number to the menu. If the dish of that type already exists on the menu
     //it is removed from the menu and the new one added.
-    this.addDishToMenu = function (dish) {
-<<<<<<< Updated upstream
-        //replace in the manu the dish of this type
-        this.menuOptions[dish.Category] = dish.RecipeID;
-        var args = {type:"item", content:dish}; 
-        this.notifyObservers(dish);
-=======
+    this.addDishToMenu = function (dish, price) {
         console.log("Entered Add Dish to Menu");
         console.log("Dish Cateogory", dish.Category);
+        console.log("Dish Price", price);
         //replace in the manu the dish of this type
         this.menuOptions[dish.Category] = dish.RecipeID;
+
+        if (dish.Category == "Appetizers") {
+            this.Appetizersprice = price;
+            this.Appetizer = dish;
+        } else if (dish.Category == "Main Dish") {
+            this.MDprice = price;
+            this.MD = dish;
+        } else if (dish.Category == "Desserts") {
+            this.dessertsprice = price;
+            this.desserts = dish;
+        }
+
         var args = {
             type: "add",
             content: dish
         };
         this.notifyObservers(args); //change dish ->args (because ifff)
->>>>>>> Stashed changes
     }
 
 
@@ -62,10 +76,12 @@ var DinnerModel = function () {
 
     //Returns all the dishes on the menu.
     this.getFullMenu = function () {
+        console.log("Entered full menu")
         var fullMenu = [];
-        for (key in this.menuOptions) {
-            fullMenu.push(this.getDish(this.menuOptions[key])); //getdish -- > getdish2
-        }
+        fullMenu[0] = this.Appetizer;
+        fullMenu[1] = this.MD;
+        fullMenu[2] = this.desserts;
+
         return fullMenu;
     }
 
@@ -80,15 +96,36 @@ var DinnerModel = function () {
         return theIngredients;
     }
 
-    /*  this.printIngredients = function (dish) {
-          var printf = '';
-          for (var i = 0; i < dish.ingredients.length; i++) {
-              var current = dish.ingredients[i];
-              printf = printf + current.quantity + ' ' + current.unit + ' ' + current.name + ' ' + '</BR>';
-          }
-          return printf;
-      }
-      */
+    /* this.printIngredients = function (dish) {
+         var printf = '';
+         var current = '';
+         for (var i = 0; i < dish.Ingredients.length; i++) {
+             current = dish.Ingredients[i];
+             printf = printf + current.Quantity + ' ' + current.Unit + ' ' + current.Name + ' ' + '</BR>';
+         }
+         return printf;
+     }
+     */
+
+    this.printIngredients2 = function (dish) {
+        var printf = '';
+        var current = '';
+
+        for (var i = 0; i < dish.Ingredients.length; i++) {
+            current = dish.Ingredients[i];
+            printf = printf + current.Quantity + ' ' + current.Unit + ' ' + current.Name + ' ' + '</BR>';
+        }
+        return printf;
+    }
+
+    /* this.ingredientsList += ' ' +
+                        (model.getNumberOfGuests() * (arg.content.Ingredients[x].Quantity)) + ' ' +
+                        arg.content.Ingredients[x].Unit + ' ' +
+                        arg.content.Ingredients[x].Name + ' ' +
+                        'SEK ' + (arg.content.Ingredients[x].Quantity) + '</span><br>';
+                    this.totalPrice += (arg.content.Ingredients[x].Quantity);
+                    */
+
 
     this.getDishPrice = function (dish) {
         var dishPrice = 0;
@@ -98,12 +135,15 @@ var DinnerModel = function () {
         }
         return dishPrice;
     }
-    this.getDishPrice = function (dish,price) {
+    this.getDishPrice2 = function (cat) {
+        console.log("category = ", cat);
         var dishPrice = 0;
-        var current;
-        for (var i = 0; i < dish.ingredients.length; i++) {
-            current = dish.ingredients[i].quantity;
-            dishPrice += current;
+        if (cat == "Appetizers") {
+            dishPrice = this.Appetizersprice;
+        } else if (cat == "Main Dish") {
+            dishPrice = this.MDprice;
+        } else if (cat == "Desserts") {
+            dishPrice = this.dessertsprice;
         }
         return dishPrice;
     }
@@ -127,11 +167,9 @@ var DinnerModel = function () {
     //Returns the total price of the menu (all the ingredients multiplied by number of guests).
     this.getTotalMenuPrice = function () {
         var totalMenuPrice = 0;
-        var ingredientsList = this.getAllIngredients();
-        for (key in ingredientsList) {
-            totalMenuPrice += parseFloat(ingredientsList[key].price);
-        }
-        return totalMenuPrice * this.getNumberOfGuests();
+        totalMenuPrice = this.Appetizersprice + this.MDprice + this.dessertsprice;
+
+        return (totalMenuPrice * this.getNumberOfGuests());
     }
 
 
@@ -146,6 +184,25 @@ var DinnerModel = function () {
         }
 
         this.notifyObservers();
+
+    }
+
+    //Removes dish from menu
+    this.removeDishFromMenu2 = function (type) {
+
+        if (type == "Appetizers") {
+            this.Appetizersprice = 0;
+            this.Appetizer = {};
+        } else if (type == "Main Dish") {
+            this.MDprice = 0;
+            this.MD = {};
+        } else if (type == "Desserts") {
+            this.dessertsprice = 0;
+            this.desserts = {};
+        }
+        this.notifyObservers(); //change dish ->args (because ifff)
+
+
 
     }
 
@@ -172,19 +229,10 @@ var DinnerModel = function () {
     }
 
     this.getAllDishes2 = function (type, filter) {
-<<<<<<< Updated upstream
-
-    var apiKey = "18f3cT02U9f6yRl3OKDpP8NA537kxYKu";
-    var param = "pg=1&rpp=4";
-    var url = "http://api.bigoven.com/recipes?" + param + "&any_kw=" + type + "&api_key=" + apiKey;
-            
-     var copy = this;
-=======
         var param = "pg=1&rpp=4";
         var url = "http://api.bigoven.com/recipes?" + param + "&any_kw=" + type + "&api_key=" + this.apiKey;
 
         var copy = this;
->>>>>>> Stashed changes
 
         $.ajax({
             type: "GET",
@@ -192,16 +240,11 @@ var DinnerModel = function () {
             cache: false,
             url: url,
             success: function (data) {
-<<<<<<< Updated upstream
-                var args = {type:"list", content: data};
-                copy.notifyObservers(args);
-=======
                 var args = {
                     type: "list",
                     content: data
                 };
                 //copy.notifyObservers(args);
->>>>>>> Stashed changes
                 return $(data.Results).filter(function (index, dish) {
                     var found = true;
                     if (filter) {
@@ -216,12 +259,7 @@ var DinnerModel = function () {
                         }
                     }
                     copy.notifyObservers(args);
-<<<<<<< Updated upstream
-                    console.log("data:" + data.ResultCount);
-                    console.log("args:" + args.content.ResultCount);
-=======
 
->>>>>>> Stashed changes
                     return ((dish.Category == type) && found);
                 });
 
@@ -255,14 +293,10 @@ var DinnerModel = function () {
             cache: false,
             url: url,
             success: function (data) {
-<<<<<<< Updated upstream
-                var args = {type:"item", content:data};
-=======
                 var args = {
                     type: "item",
                     content: data
                 };
->>>>>>> Stashed changes
                 copy.notifyObservers(args);
             }
 

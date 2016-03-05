@@ -23,31 +23,29 @@ var InstructionsView = function (container, model) {
 
     this.update = function (arg) {
         if (arg) {
+            if (arg.type == "add") {
 
-            var menu = model.getFullMenu();
+                for (var i = 0; i < model.getFullMenu().length; i++) {
+                    var dish = model.getFullMenu()[i];
 
-            var ingredientsList = "";
-            for (var i = 0; i < menu.length; i++) {
-                var dish = menu[i];
-                if (dish.type == 'starter') {
-                    this.starterImage.attr('src', 'images/' + dish.image);
-                    this.starterName.html(dish.name);
-                    this.starterPreparation.html(dish.description);
-                    this.starterIngredients.html(model.printIngredients(dish));
-                }
-                if (dish.type == 'main dish') {
-                    this.mainImage.attr('src', 'images/' + dish.image);
-                    this.mainName.html(dish.name);
-                    this.mainPreparation.html(dish.description);
-                    this.mainIngredients.html(model.printIngredients(dish));
-                }
-                if (dish.type == 'dessert') {
-                    this.dessertImage.attr('src', 'images/' + dish.image);
-                    this.dessertName.html(dish.name);
-                    this.dessertPreparation.html(dish.description);
-                    this.dessertIngredients.html(model.printIngredients(dish));
-                }
+                    if (dish.Category == 'Appetizers') {
 
+                        this.starterImage.attr('src', dish.ImageURL);
+                        this.starterName.html(dish.Title);
+                        this.starterPreparation.html(dish.Description);
+                        this.starterIngredients.html(model.printIngredients2(dish));
+                    } else if (dish.Category == 'Main Dish') {
+                        this.mainImage.attr('src', dish.ImageURL);
+                        this.mainName.html(dish.Title);
+                        this.mainPreparation.html(dish.Description);
+                        this.mainIngredients.html(model.printIngredients2(dish));
+                    } else if (dish.Category == 'Desserts') {
+                        this.dessertImage.attr('src', dish.ImageURL);
+                        this.dessertName.html(dish.Title);
+                        this.dessertPreparation.html(dish.Description);
+                        this.dessertIngredients.html(model.printIngredients2(dish));
+                    }
+                }
             }
         }
 

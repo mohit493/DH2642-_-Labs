@@ -16,35 +16,6 @@ var DishDescriptionView = function (container, model) {
     model.addObserver(this);
 
     this.update = function (arg) {
-<<<<<<< Updated upstream
-
-        if (arg.type == "item") {
-
-            //upload dish info
-            this.dish = arg.content;
-
-            this.dishName.html(arg.content.Title);
-            this.dishImage.attr('src', arg.content.ImageURL);
-            this.dishPreparation.html(arg.content.Description);
-
-            var ingredientsList = "";
-            var totalPrice = 0;
-
-            for (var x = 0; x < arg.content.Ingredients.length; x++) {
-            ingredientsList += ' ' +
-                (model.getNumberOfGuests() * (arg.content.Ingredients[x].Quantity)) + ' ' +
-                arg.content.Ingredients[x].Unit + ' ' +
-                arg.content.Ingredients[x].Name + ' ' +
-                'SEK ' + (arg.content.Ingredients[x].Quantity) + '</span><br>';
-            totalPrice += (arg.content.Ingredients[x].Quantity);
-        }
-
-        this.ingredientsFor.html(model.getNumberOfGuests());
-        document.getElementById("ingredientsList").innerHTML = ingredientsList;
-        document.getElementById("dishCost").innerHTML = 'SEK ' + (totalPrice * (model.getNumberOfGuests()));
-       }
-        
-=======
 
         if (arg) {
             if (arg.type == "item") {
@@ -61,10 +32,7 @@ var DishDescriptionView = function (container, model) {
                 this.ingredientquantity = [];
                 this.ingrunit = [];
                 this.ingrname = [];
->>>>>>> Stashed changes
 
-        
-    }
 
                 for (var x = 0; x < arg.content.Ingredients.length; x++) {
                     this.ingredientquantity[x] = arg.content.Ingredients[x].Quantity;
