@@ -2,6 +2,10 @@
 var SelectDishViewController = function (view, model) {
 
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     $("#selectDishView").on("click", "li[data-dish-id]", function () {
         var dishId = $(this).attr("data-dish-id");
         $('#selectDishView').hide();

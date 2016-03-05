@@ -12,6 +12,7 @@ var SelectDishView = function (container, model) {
 
 
 
+<<<<<<< Updated upstream
     this.update = function(arg) {
 
         var sessionlist = "";
@@ -19,18 +20,28 @@ var SelectDishView = function (container, model) {
             for (var x = 0; x < arg.content.Results.length; x++) {
             sessionlist += '<li class=list data-dish-id="' + arg.content.Results[x].RecipeID + '" style="display:inline-block;width:200px;height:200px;">' + '<div id=' + arg.content.Results[x].RecipeID + '>' + '<img style="width:150px;height:150px;" src="' + arg.content.Results[x].ImageURL + '" alt ="' + arg.content.Results[x].ImageURL +
                 '">' + '<br>' + arg.content.Results[x].Title + '</div>';
+=======
+    this.update = function (arg) {
+        if (arg) {
+            var sessionlist = "";
+            if (arg.type == "list") {
+                for (var x = 0; x < arg.content.Results.length; x++) {
+                    sessionlist += '<li class=list data-dish-id="' + arg.content.Results[x].RecipeID + '" style="display:inline-block;width:200px;height:200px;">' + '<div id=' + arg.content.Results[x].RecipeID + '>' + '<img style="width:150px;height:150px;" src="' + arg.content.Results[x].ImageURL + '" alt ="' + arg.content.Results[x].ImageURL +
+                        '">' + '<br>' + arg.content.Results[x].Title + '</div>';
+                }
+                document.getElementById("starters").innerHTML = sessionlist;
+                //sessionlist = "";
+                document.getElementById("main").innerHTML = sessionlist;
+                //sessionlist = "";
+                document.getElementById("desserts").innerHTML = sessionlist;
+                //sessionlist = "";
+>>>>>>> Stashed changes
             }
-        document.getElementById("starters").innerHTML = sessionlist;
-        //sessionlist = "";
-        document.getElementById("main").innerHTML = sessionlist;
-        //sessionlist = "";
-        document.getElementById("desserts").innerHTML = sessionlist;
-        //sessionlist = "";
         }
     }
 
-    
-    //this.update();
+
+    this.update();
 
     // Search functionality in the sidebar
     var sourceArr = [];

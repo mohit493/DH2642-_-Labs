@@ -1,7 +1,7 @@
 //DinnerModel Object constructor
 var DinnerModel = function () {
 
-
+    this.apiKey = "66J8l00npnHHZcCNLRhxkfW1OHxbojy4";
 
     //Each menu has only one dich of a type (starter, main dish and dessert)
     var numberOfGuests = 1;
@@ -12,12 +12,14 @@ var DinnerModel = function () {
 
     this.setNumberOfGuests = function (num) {
         numberOfGuests = num;
+
         this.notifyObservers();
     }
 
     // should return 
     this.getNumberOfGuests = function () {
         return numberOfGuests;
+
     }
 
     //create null menu for testing
@@ -32,11 +34,24 @@ var DinnerModel = function () {
     //Adds the passed dish number to the menu. If the dish of that type already exists on the menu
     //it is removed from the menu and the new one added.
     this.addDishToMenu = function (dish) {
+<<<<<<< Updated upstream
         //replace in the manu the dish of this type
         this.menuOptions[dish.Category] = dish.RecipeID;
         var args = {type:"item", content:dish}; 
         this.notifyObservers(dish);
+=======
+        console.log("Entered Add Dish to Menu");
+        console.log("Dish Cateogory", dish.Category);
+        //replace in the manu the dish of this type
+        this.menuOptions[dish.Category] = dish.RecipeID;
+        var args = {
+            type: "add",
+            content: dish
+        };
+        this.notifyObservers(args); //change dish ->args (because ifff)
+>>>>>>> Stashed changes
     }
+
 
 
     //Returns the dish number that is on the menu for selected type 
@@ -49,7 +64,7 @@ var DinnerModel = function () {
     this.getFullMenu = function () {
         var fullMenu = [];
         for (key in this.menuOptions) {
-            fullMenu.push(this.getDish(this.menuOptions[key]));
+            fullMenu.push(this.getDish(this.menuOptions[key])); //getdish -- > getdish2
         }
         return fullMenu;
     }
@@ -65,14 +80,15 @@ var DinnerModel = function () {
         return theIngredients;
     }
 
-    this.printIngredients = function (dish) {
-        var printf = '';
-        for (var i = 0; i < dish.ingredients.length; i++) {
-            var current = dish.ingredients[i];
-            printf = printf + current.quantity + ' ' + current.unit + ' ' + current.name + ' ' + '</BR>';
-        }
-        return printf;
-    }
+    /*  this.printIngredients = function (dish) {
+          var printf = '';
+          for (var i = 0; i < dish.ingredients.length; i++) {
+              var current = dish.ingredients[i];
+              printf = printf + current.quantity + ' ' + current.unit + ' ' + current.name + ' ' + '</BR>';
+          }
+          return printf;
+      }
+      */
 
     this.getDishPrice = function (dish) {
         var dishPrice = 0;
@@ -82,6 +98,17 @@ var DinnerModel = function () {
         }
         return dishPrice;
     }
+    this.getDishPrice = function (dish,price) {
+        var dishPrice = 0;
+        var current;
+        for (var i = 0; i < dish.ingredients.length; i++) {
+            current = dish.ingredients[i].quantity;
+            dishPrice += current;
+        }
+        return dishPrice;
+    }
+
+
 
     //Returns all ingredients for all the dishes on the menu.
     this.getAllIngredients = function () {
@@ -107,13 +134,17 @@ var DinnerModel = function () {
         return totalMenuPrice * this.getNumberOfGuests();
     }
 
+
     //Removes dish from menu
     this.removeDishFromMenu = function (id) {
         for (key in this.menuOptions) {
             if (this.menuOptions[key] == id) {
                 this.menuOptions[key] = 0;
             }
+
+
         }
+
         this.notifyObservers();
 
     }
@@ -141,12 +172,19 @@ var DinnerModel = function () {
     }
 
     this.getAllDishes2 = function (type, filter) {
+<<<<<<< Updated upstream
 
     var apiKey = "18f3cT02U9f6yRl3OKDpP8NA537kxYKu";
     var param = "pg=1&rpp=4";
     var url = "http://api.bigoven.com/recipes?" + param + "&any_kw=" + type + "&api_key=" + apiKey;
             
      var copy = this;
+=======
+        var param = "pg=1&rpp=4";
+        var url = "http://api.bigoven.com/recipes?" + param + "&any_kw=" + type + "&api_key=" + this.apiKey;
+
+        var copy = this;
+>>>>>>> Stashed changes
 
         $.ajax({
             type: "GET",
@@ -154,8 +192,16 @@ var DinnerModel = function () {
             cache: false,
             url: url,
             success: function (data) {
+<<<<<<< Updated upstream
                 var args = {type:"list", content: data};
                 copy.notifyObservers(args);
+=======
+                var args = {
+                    type: "list",
+                    content: data
+                };
+                //copy.notifyObservers(args);
+>>>>>>> Stashed changes
                 return $(data.Results).filter(function (index, dish) {
                     var found = true;
                     if (filter) {
@@ -170,8 +216,12 @@ var DinnerModel = function () {
                         }
                     }
                     copy.notifyObservers(args);
+<<<<<<< Updated upstream
                     console.log("data:" + data.ResultCount);
                     console.log("args:" + args.content.ResultCount);
+=======
+
+>>>>>>> Stashed changes
                     return ((dish.Category == type) && found);
                 });
 
@@ -196,16 +246,23 @@ var DinnerModel = function () {
 
         var copy = this;
 
-        var apiKey = "18f3cT02U9f6yRl3OKDpP8NA537kxYKu";
+        //var apiKey = "18f3cT02U9f6yRl3OKDpP8NA537kxYKu";
         var recipeID = id; //id
-        var url = "http://api.bigoven.com/recipe/" + recipeID + "?api_key=" + apiKey;
+        var url = "http://api.bigoven.com/recipe/" + recipeID + "?api_key=" + this.apiKey;
         $.ajax({
             type: "GET",
             dataType: 'json',
             cache: false,
             url: url,
             success: function (data) {
+<<<<<<< Updated upstream
                 var args = {type:"item", content:data};
+=======
+                var args = {
+                    type: "item",
+                    content: data
+                };
+>>>>>>> Stashed changes
                 copy.notifyObservers(args);
             }
 

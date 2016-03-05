@@ -28,7 +28,18 @@ var SidebarView = function (container, model) {
 
         //display number of guests
         this.numberOfGuests.html(model.getNumberOfGuests());
+        if (arg) {
+            if (arg.type == "add") {
+                console.log("Dish type ", arg.content.Category)
+                if (arg.content.Category == "Appetizers") {
+                    this.starterName.html(arg.content.Title);
+                } else if (arg.content.Category == "Main Dish") {
+                    this.mainName.html(arg.content.Title);
+                } else if (arg.content.Category == "Desserts") {
+                    this.dessertName.html(arg.content.Title);
+                }
 
+<<<<<<< Updated upstream
         if(arg.type == "item") {
             if (arg.content.Category == "Appetizers"); {
                 this.starter = arg.content;
@@ -51,8 +62,12 @@ var SidebarView = function (container, model) {
         this.starterName.html(this.starter.Title);
         this.mainName.html(this.main.Title);
         this.dessertName.html(this.dessert.Title);
+=======
+            }
 
-        //display total price
+>>>>>>> Stashed changes
+
+        }
         this.totalPrice.html(model.getTotalMenuPrice());
 
     }
