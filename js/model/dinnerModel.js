@@ -210,6 +210,8 @@ var DinnerModel = function () {
     //you can use the filter argument to filter out the dish by name or ingredient (use for search)
     //if you don't pass any filter all the dishes will be returned
     this.getAllDishes = function (type, filter) {
+
+
         return $(dishes).filter(function (index, dish) {
             var found = true;
             if (filter) {
@@ -229,10 +231,13 @@ var DinnerModel = function () {
     }
 
     this.getAllDishes2 = function (type, filter) {
+
+
         var param = "pg=1&rpp=4";
         var url = "http://api.bigoven.com/recipes?" + param + "&any_kw=" + type + "&api_key=" + this.apiKey;
 
         var copy = this;
+        $('#loading').show(); //image loading
 
         $.ajax({
             type: "GET",
@@ -263,6 +268,10 @@ var DinnerModel = function () {
                     return ((dish.Category == type) && found);
                 });
 
+            },
+
+            complete: function () {
+                $('#loading').hide();
             }
         });
 
@@ -287,6 +296,7 @@ var DinnerModel = function () {
         //var apiKey = "18f3cT02U9f6yRl3OKDpP8NA537kxYKu";
         var recipeID = id; //id
         var url = "http://api.bigoven.com/recipe/" + recipeID + "?api_key=" + this.apiKey;
+        $('#loading2').show(); //image loading
         $.ajax({
             type: "GET",
             dataType: 'json',
@@ -298,6 +308,9 @@ var DinnerModel = function () {
                     content: data
                 };
                 copy.notifyObservers(args);
+            },
+            complete: function () {
+                $('#loading2').hide();
             }
 
         });
